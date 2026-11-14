@@ -6,9 +6,8 @@
 <title>Calculador de Drywall</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%2314532d'/%3E%3Cstop offset='1' stop-color='%2316a34a'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url%28%23g%29'/%3E%3Ctext x='32' y='48' text-anchor='middle' font-family='Arial,Helvetica,sans-serif' font-weight='900' font-size='46' fill='%23fff'%3ED%3C/text%3E%3C/svg%3E">
 <style>
-:root{--bg:#e8f1ea;--card:#fff;--ink:#16301f;--mut:#5d7565;--soft:#eef6f0;--line:#cfe0d3;--pri:#15803d;--org:#f07f0a;color-scheme:light dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1c14;--card:#17291d;--ink:#e8f6ec;--mut:#9bb8a4;--soft:#1f3627;--line:#2f4d3a;--pri:#4ade80}}
-:root[data-theme="dark"]{--bg:#0f1c14;--card:#17291d;--ink:#e8f6ec;--mut:#9bb8a4;--soft:#1f3627;--line:#2f4d3a;--pri:#4ade80}
+:root{--bg:#e8f1ea;--card:#fff;--ink:#16301f;--mut:#5d7565;--soft:#eef6f0;--line:#cfe0d3;--pri:#15803d;--org:#f07f0a;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="dark"]{color-scheme:dark;--bg:#0f1c14;--card:#17291d;--ink:#e8f6ec;--mut:#9bb8a4;--soft:#1f3627;--line:#2f4d3a;--pri:#4ade80}
 *{box-sizing:border-box;margin:0;padding:0;font-family:'Segoe UI',Roboto,Arial,sans-serif}
 html{scroll-padding-top:env(safe-area-inset-top,0px)}
 body{background:var(--bg);color:var(--ink);min-height:100vh;padding:10px 10px 24px}
@@ -85,13 +84,13 @@ select{width:100%;border:2px solid var(--pri);border-radius:9px;background:var(-
 .box .pnm.go{border-color:var(--ac,var(--pri));color:color-mix(in srgb,var(--ac,var(--pri)) 70%,var(--ink));background:color-mix(in srgb,var(--ac,var(--pri)) 10%,var(--card))}
 
 /* ---- barra superior: volver + nuevo cálculo ---- */
-.hero .back{justify-self:start}.hero .newc{justify-self:end}
+.hero .back{justify-self:start}.hero .hr{justify-self:end;display:flex;gap:6px;align-items:center}
 .hbtn{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.6);color:#fff;border-radius:999px;font-weight:800;font-size:12.5px;padding:8px 13px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background .15s}
 .hbtn:hover{background:rgba(255,255,255,.3)}
 .hbtn:focus-visible{outline:3px solid #ffd27a;outline-offset:2px}
 .hbtn.newc{background:var(--org);border-color:#ffd9a3;color:#fff;box-shadow:0 3px 10px rgba(0,0,0,.25)}.hbtn.newc:hover{background:#ff9419}
 .hbtn svg{width:18px;height:18px;display:block;flex:none}
-@media(max-width:760px){.hero{grid-template-columns:1fr auto;grid-template-areas:"b n" "t t"}.hero .back{grid-area:b}.hero .newc{grid-area:n}.hero .ht{grid-area:t}}
+@media(max-width:760px){.hero{grid-template-columns:1fr auto;grid-template-areas:"b n" "t t"}.hero .back{grid-area:b}.hero .hr{grid-area:n}.hero .ht{grid-area:t}}
 /* ---- botón descargar imagen ---- */
 .xb{display:inline-flex;align-items:center;justify-content:center;gap:6px;flex:none;white-space:nowrap;border:2px solid var(--org);background:color-mix(in srgb,var(--org) 14%,var(--card));color:color-mix(in srgb,var(--org) 55%,var(--ink));border-radius:10px;padding:7px 12px;font-size:13px;font-weight:900;cursor:pointer;transition:background .15s}
 .xb:hover:not(:disabled){background:color-mix(in srgb,var(--org) 26%,var(--card))}
@@ -135,6 +134,29 @@ button.orow:focus-visible,.mbtn:focus-visible{outline:3px solid var(--org);outli
 .step input::placeholder{color:#a9b5ad;font-weight:800}
 .tg3x{grid-template-columns:repeat(3,1fr)}
 .bt .sd{display:block;font-size:11px;font-weight:700;opacity:.85;line-height:1.2}
+/* ---- tema + zoom 3D ---- */
+.hbtn.thm svg{width:18px;height:18px}
+@media(max-width:560px){.hbtn.thm .tl{display:none}}
+@media(max-width:420px){.hbtn{padding:8px 10px;font-size:11.5px}.hero{padding:10px}}
+.zc{display:flex;align-items:center;justify-content:center;gap:6px}
+.zc button{min-width:38px;height:36px;border:2px solid var(--pri);background:var(--card);color:var(--pri);border-radius:9px;font-size:19px;font-weight:900;cursor:pointer;padding:0 10px}
+.zc button.tx{font-size:12px}
+.zc button:focus-visible{outline:3px solid var(--org);outline-offset:2px}
+.zc span{min-width:48px;text-align:center;font-weight:800;font-size:13px;color:var(--mut)}
+/* ---- cómo se calcula ---- */
+details.frm{padding:0}
+details.frm summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:8px;padding:12px 14px;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.3px;color:var(--pri);border-radius:14px}
+details.frm summary::-webkit-details-marker{display:none}
+details.frm summary::after{content:'▾';font-size:16px;transition:transform .15s}
+details.frm[open] summary::after{transform:rotate(180deg)}
+details.frm summary:focus-visible{outline:3px solid var(--org);outline-offset:2px}
+.fb{padding:2px 14px 14px;display:flex;flex-direction:column;gap:8px}
+.fb .t b{color:var(--ink)}
+.fr{border:2px solid var(--line);background:var(--soft);border-radius:10px;padding:7px 10px;display:flex;flex-direction:column;gap:2px}
+.fr b{font-size:13px;font-weight:900}
+.fr code{font-family:Consolas,'Courier New',monospace;font-size:12.5px;font-weight:700;color:var(--ink);word-break:break-word}
+.fr p{font-size:13px;font-weight:600;line-height:1.4;color:var(--ink)}
+.fr .ex{font-size:12.5px;font-weight:700;color:var(--pri);background:var(--card);border-radius:8px;padding:5px 8px;line-height:1.4}
 </style>
 </head>
 <body>
@@ -142,10 +164,10 @@ button.orow:focus-visible,.mbtn:focus-visible{outline:3px solid var(--org);outli
   <header class="hero">
     <a class="hbtn back" href="https://capacitacion3vesmartin-ves.github.io/campuscapacitacion/" target="_top">‹ Volver al Campus</a>
     <div class="ht"><h1>Calculador de Drywall</h1><div class="sub">By: Capacitación V.E.S.</div></div>
-    <button type="button" class="hbtn newc" onclick="newCalc()" title="Nuevo cálculo" aria-label="Nuevo cálculo">
+    <div class="hr"><button type="button" class="hbtn thm" id="thm" title="Cambiar tema"></button><button type="button" class="hbtn newc" onclick="newCalc()" title="Nuevo cálculo" aria-label="Nuevo cálculo">
       <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.6-5.9"/><path d="M20 4v4.5h-4.5"/><path d="M12 9v6M9 12h6"/></svg><span>Nuevo cálculo</span>
     </button>
-  </header>
+  </div></header>
   <div class="grid">
     <div class="card inp">
       <div class="mbk">
@@ -184,17 +206,19 @@ button.orow:focus-visible,.mbtn:focus-visible{outline:3px solid var(--org);outli
       <button class="fold" id="pp"><span>Elegir plancha por pared</span><span>▾</span></button>
       <div class="mg hidden" id="pw"></div>
       <div class="dv" id="dv"></div>
+      <div class="zc hidden" id="zc"><button type="button" id="zo" aria-label="Alejar">−</button><span id="zv">100%</span><button type="button" id="zi" aria-label="Acercar">+</button><button type="button" class="tx" id="zr">Restablecer</button></div>
       <div class="di" id="di"></div>
       <button type="button" class="bt" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑ Volver a las medidas</button>
     </div>
   </div>
+  <details class="card frm" id="frm"><summary>¿Cómo se calcula?</summary><div class="fb"><p class="t">Aquí aprendes paso a paso de dónde salen los números. Todo parte de dos medidas: cuánto mide la pared de largo (si tienes varias paredes, súmalas) y qué tan alta es. Los ejemplos usan una pared de <b>5 m de largo por 2.40 m de alto</b>, forrada por <b>1 cara</b>.</p><p class="t"><b>Regla de oro:</b> siempre se redondea hacia arriba, porque no se compran medias planchas ni medio parante. Si te sale 4.03, compras 5.</p><div class="fr"><b>1. Planchas</b><p>Calcula cuántos metros cuadrados tiene la pared y divídelos entre lo que cubre una plancha (1.22 × 2.44 m = 2.98 m²). Si forras las 2 caras, necesitas el doble.</p><code>Cuenta: largo × alto ÷ 2.98 × caras</code><span class="ex">Ejemplo: 5 × 2.40 = 12 m² → 12 ÷ 2.98 = 4.03 → <b>5 planchas</b>.</span></div><div class="fr"><b>2. Parantes</b><p>Los parantes van parados cada 61 cm (o cada 40.7 cm si la pared pasa de 3 m de alto, porque necesita más refuerzo). Divide el largo entre esa distancia y suma 1, porque al final queda un parante más, como en una cerca.</p><code>Cuenta: largo ÷ 0.61 + 1</code><span class="ex">Ejemplo: 5 ÷ 0.61 = 8.2 → 8.2 + 1 = 9.2 → <b>10 parantes</b>.</span></div><div class="fr"><b>3. Rieles</b><p>El riel es el carril donde se meten los parantes: va uno arriba y otro abajo, o sea 2 veces el largo de la pared. Cada riel mide 3 m. Si hay ventanas, se suman 2 tramos más por cada una (arriba y abajo de ella).</p><code>Cuenta: (2 × largo + 2 × ancho de cada ventana) ÷ 3</code><span class="ex">Ejemplo: 2 × 5 = 10 m → 10 ÷ 3 = 3.3 → <b>4 rieles</b>.</span></div><div class="fr"><b>4. Esquineros</b><p>Protegen las esquinas que sobresalen y los bordes de puertas y ventanas. Suma los metros que necesitas y divide entre 3 (cada pieza mide 3 m). Cada esquina expuesta mide lo mismo que la altura. Una puerta lleva esquinero en sus dos lados y arriba (más 3 cm de sobra) por las dos caras; una ventana lo lleva en sus cuatro lados, también por las dos caras.</p><code>Cuenta: (esquinas × alto + contorno de puertas y ventanas) ÷ 3</code><span class="ex">Ejemplo: 2 esquinas × 2.40 = 4.8 m. Puerta de 0.90 × 2.10: (2 × 2.10 + 0.90 + 0.03) × 2 = 10.26 m. Total 15.06 m → 15.06 ÷ 3 = 5.02 → <b>6 esquineros</b>.</span></div><div class="fr"><b>5. Contramarcos de madera</b><p>Son los listones de madera que enmarcan el hueco de puertas y ventanas. Mide el contorno (los dos lados y arriba en la puerta; los cuatro lados en la ventana) y divídelo entre el largo del listón que elijas.</p><code>Cuenta: contorno ÷ largo del listón</code><span class="ex">Ejemplo: Puerta de 0.90 × 2.10: 2 × 2.10 + 0.90 = 5.1 m → 5.1 ÷ 3.20 = 1.6 → <b>2 listones</b>.</span></div><div class="fr"><b>6. Tornillos para plancha</b><p>Se usan unos 40 tornillos por plancha. Se venden por cientos.</p><code>Cuenta: planchas × 40 ÷ 100</code><span class="ex">Ejemplo: 5 × 40 = 200 → <b>2 cientos</b>.</span></div><div class="fr"><b>7. Tornillos de estructura</b><p>Unen los parantes con los rieles: unos 8 por parante. También se venden por cientos.</p><code>Cuenta: parantes × 8 ÷ 100</code><span class="ex">Ejemplo: 10 × 8 = 80 → 80 ÷ 100 = 0.8 → <b>1 ciento</b>.</span></div><div class="fr"><b>8. Clavos y fulminantes (piso de cemento)</b><p>Sobre cemento, el riel se fija con un clavo y un fulminante cada 40 cm. Como hay riel abajo y arriba, el largo se cuenta dos veces. Los fulminantes salen con la misma cuenta.</p><code>Cuenta: largo × 2 ÷ 0.40 ÷ 100</code><span class="ex">Ejemplo: 5 × 2 = 10 m → 10 ÷ 0.40 = 25 clavos → <b>1 ciento</b>.</span></div><div class="fr"><b>9. Silicona (piso cerámico)</b><p>Sobre cerámica no se clava: el riel se pega con silicona. Un cartucho rinde unos 10 m de riel, y también se cuenta el riel de arriba y el de abajo.</p><code>Cuenta: largo × 2 ÷ 10</code><span class="ex">Ejemplo: 5 × 2 = 10 m → 10 ÷ 10 = 1 → <b>1 cartucho</b>.</span></div><div class="fr"><b>10. Lana de vidrio</b><p>Va dentro de la pared para aislar. Un rollo cubre 14.4 m².</p><code>Cuenta: largo × alto ÷ 14.4</code><span class="ex">Ejemplo: 12 ÷ 14.4 = 0.83 → <b>1 rollo</b>.</span></div><div class="fr"><b>11. Masilla</b><p>Sirve para tapar las juntas y los tornillos. Rinde 1.4 m² por kilo, en cada cara.</p><code>Cuenta: largo × alto ÷ 1.4 × caras</code><span class="ex">Ejemplo: 12 ÷ 1.4 = 8.6 → <b>9 kilos</b>.</span></div><div class="fr"><b>12. Cinta de papel</b><p>Cubre las juntas entre planchas. Se calcula más o menos 1 m de cinta por cada 3.66 m² de pared, y luego se ve cuántos rollos hacen falta según el largo del rollo (20, 75 o 90 m).</p><code>Cuenta: largo × alto ÷ 3.66 ÷ largo del rollo × caras</code><span class="ex">Ejemplo: 12 ÷ 3.66 = 3.3 m de cinta → 3.3 ÷ 75 = 0.04 → <b>1 rollo de 75 m</b>.</span></div><p class="t">Recuerda: es un cálculo aproximado. En obra siempre puede sobrar o faltar un poco de material.</p></div></details>
 </div>
 <div class="md hidden" id="md"><div class="mbox"><div class="mh"><b id="mt"></b><button class="mx" id="mx">✕</button></div><div id="mb"></div></div></div>
 
 <script>
 const $=id=>document.getElementById(id);
 const TY={rh:['Placa RH','#91dcd7'],rf:['Placa RF','#f2b5b4'],st:['Placa ST','#dedddd'],mu:['Multiplaca','#d4d4d4'],sb:['Superboard','#d4d4d4']},BK='#e6ca96';
-let C=1,V='f',O=[],oid=0,E=0,PA='',CM=0,M='',T=['st','st','st','st'],yaw=.6,pit=.45,last=null;
+let C=1,V='f',O=[],oid=0,E=0,PA='',CM=0,M='',T=['st','st','st','st'],yaw=.6,pit=.45,zoom=1,last=null;
 const f2=x=>(Math.round(x*100)/100).toFixed(2),nm=x=>+x||0,opts=v=>Object.keys(TY).map(k=>`<option value="${k}"${k===v?' selected':''}>${TY[k][0]}</option>`).join('');
 const ICO=d=>`<svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">${d}</svg>`;
 const DOOR=ICO('<rect x="3.5" y="1.5" width="9" height="13" rx="1"/><circle cx="10.3" cy="8.5" r=".6" fill="currentColor"/>'),WIN=ICO('<rect x="2" y="2" width="12" height="12" rx="1"/><path d="M8 2v12M2 8h12"/>');
@@ -324,6 +348,57 @@ function calc(){vis();
   set('la',Math.ceil(S*h/14.4));set('ma',Math.ceil(S*h/1.4*C));set('ci',Math.ceil(S*h/3.66/CI*C));
   draw(h,L,S)}
 
+/* parantes metálicos con orificios (reverso de pared a 1 cara) */
+const MDEF='<defs><linearGradient id="mgv" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#939da4"/><stop offset=".2" stop-color="#eef1f3"/><stop offset=".5" stop-color="#cdd4d9"/><stop offset=".8" stop-color="#eef1f3"/><stop offset="1" stop-color="#88939a"/></linearGradient><linearGradient id="mgh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#939da4"/><stop offset=".25" stop-color="#eef1f3"/><stop offset=".6" stop-color="#cdd4d9"/><stop offset="1" stop-color="#88939a"/></linearGradient></defs>';
+const stw=()=>PA?(+PA)/1000:.064;
+const holeYs=h=>{const a=[];for(let y=.4;y<=h-.4+1e-9;y+=.5)a.push(y);if(!a.length)a.push(h/2);return a};
+function studs3(atw,l,off,h,Z,pt,d0,d1,rzu){const sdw=Math.max(stw(),Z*.02),rt=Math.min(.12,h*.04),stp=h>3?.407:.61,col='#c3cbd1',dk='#8f9aa1',ln='#6f7a82',sk=Z*.005,
+  poly=(o,c,w)=>`<polygon points="${pt(o)}" fill="${c}" stroke="${ln}" stroke-width="${w||sk}"/>`,
+  strip=(x0,x1,y0,y1,dd)=>[atw(x0,y0,dd),atw(x1,y0,dd),atw(x1,y1,dd),atw(x0,y1,dd)];
+  let s=poly([atw(0,rt,d0),atw(l,rt,d0),atw(l,rt,d1),atw(0,rt,d1)],dk);
+  for(let x=Math.ceil(off/stp-1e-9)*stp;x<=off+l+1e-6;x+=stp){const a=Math.min(Math.max(x-off-sdw/2,0),Math.max(l-sdw,0)),b=a+sdw,cx=(a+b)/2,hw=(d1-d0)*.4,hh=(d1-d0)*1.05,sx=rzu>0?b:a;
+    s+=poly([atw(sx,rt,d0),atw(sx,rt,d1),atw(sx,h-rt,d1),atw(sx,h-rt,d0)],dk);
+    s+=poly(strip(a,b,rt,h-rt,d1),col);
+    holeYs(h).forEach(yy=>{if(yy-hh/2<rt||yy+hh/2>h-rt)return;const o=[];for(let i=0;i<12;i++){const t=i/12*Math.PI*2;o.push(atw(sx,yy+Math.sin(t)*hh/2,(d0+d1)/2+Math.cos(t)*hw/2))}s+=poly(o,'#5d6870',sk*.8)})}
+  s+=poly(strip(0,l,0,rt,d1),col)+poly(strip(0,l,h-rt,h,d1),col);
+  return s}
+/* puertas y ventanas */
+function opening3(o,atw,vf,rzu,DT,Z,pt){
+  const x0=o.x,x1=o.x+o.w,y0=o.s,y1=o.s+o.h,door=o.t==='p',sk=Z*.006,A=atw,om=DT/2,fw=Math.min(.06,o.w*.08,o.h*.08),
+  poly=(a,c,w,op)=>`<polygon points="${pt(a)}" fill="${c}"${op?` fill-opacity="${op}"`:''} stroke="#8d5a2b" stroke-width="${w||sk}"/>`,
+  rc=(xa,xb,ya,yb)=>[A(xa,ya,om),A(xb,ya,om),A(xb,yb,om),A(xa,yb,om)];
+  let s=poly([vf(x0,y0),vf(x1,y0),vf(x1,y1),vf(x0,y1)],door?'#efe9dd':'#d9ecf6');
+  s+=poly(rzu>0?[A(x0,y0,0),A(x0,y0,DT),A(x0,y1,DT),A(x0,y1,0)]:[A(x1,y0,0),A(x1,y0,DT),A(x1,y1,DT),A(x1,y1,0)],'#c8975a');
+  s+=poly([A(x0,y0,0),A(x1,y0,0),A(x1,y0,DT),A(x0,y0,DT)],'#dcb98a');
+  if(door){
+    s+=poly(rc(x0,x1,y0,y1),'#b98349');
+    const px0=x0+o.w*.14,px1=x1-o.w*.14;
+    s+=poly(rc(px0,px1,y0+o.h*.07,y0+o.h*.45),'#a8733d',sk*.7)+poly(rc(px0,px1,y0+o.h*.53,y1-o.h*.07),'#a8733d',sk*.7);
+    const kx=x1-o.w*.1,ky=y0+Math.min(1,o.h*.47),kr=Math.min(.04,o.w*.05),kp=[];
+    for(let i=0;i<10;i++){const t=i/10*Math.PI*2;kp.push(A(kx+Math.cos(t)*kr,ky+Math.sin(t)*kr,om))}
+    s+=poly(kp,'#e6c34a',sk*.7)}
+  else{
+    s+=poly(rc(x0,x1,y0,y1),'#ece7dc');
+    const gx0=x0+fw,gx1=x1-fw,gy0=y0+fw,gy1=y1-fw;
+    s+=poly(rc(gx0,gx1,gy0,gy1),'#bfe3f2',sk*.7,.9);
+    if(o.w>.9)s+=poly(rc((x0+x1)/2-fw/2,(x0+x1)/2+fw/2,gy0,gy1),'#ece7dc',sk*.7);
+    if(o.h>1.5)s+=poly(rc(gx0,gx1,(y0+y1)/2-fw/2,(y0+y1)/2+fw/2),'#ece7dc',sk*.7);
+    const gw=gx1-gx0,gh=gy1-gy0;
+    s+=`<polygon points="${pt([A(gx0+gw*.12,gy0+gh*.1,om),A(gx0+gw*.3,gy0+gh*.1,om),A(gx0+gw*.12,gy0+gh*.55,om)])}" fill="#fff" fill-opacity=".45"/>`}
+  s+=`<polygon points="${pt([vf(x0,y0),vf(x1,y0),vf(x1,y1),vf(x0,y1)])}" fill="none" stroke="#8d5a2b" stroke-width="${Z*.012}"/>`;
+  return s}
+/* puertas y ventanas en el plano frontal */
+function open2d(o,x,y,lw){
+  const w=o.w,h=o.h,sk=Math.max(.025,lw*3),fw=Math.min(.06,w*.08,h*.08),r=(a,b,c,d,f,st,sw)=>`<rect x="${a}" y="${b}" width="${c}" height="${d}" fill="${f}" stroke="${st||'none'}" stroke-width="${sw||0}"/>`;
+  if(o.t==='p'){
+    let q=r(x,y,w,h,'#c8975a','#8d5a2b',sk)+r(x+fw,y+fw,w-2*fw,h-fw,'#b98349','#8a5a2e',sk*.5);
+    const px0=x+w*.14,pw=w*.72;
+    q+=r(px0,y+h*.07,pw,h*.38,'#a8733d','#8a5a2e',sk*.4)+r(px0,y+h*.55,pw,h*.38,'#a8733d','#8a5a2e',sk*.4);
+    return q+`<circle cx="${x+w*.9}" cy="${y+h-Math.min(1,h*.47)}" r="${Math.min(.04,w*.05)}" fill="#e6c34a" stroke="#8a5a2e" stroke-width="${sk*.3}"/>`}
+  let q=r(x,y,w,h,'#ece7dc','#8d5a2b',sk)+r(x+fw,y+fw,w-2*fw,h-2*fw,'#bfe3f2','#8a8f93',sk*.4);
+  if(w>.9)q+=r(x+w/2-fw/2,y+fw,fw,h-2*fw,'#ece7dc','#8a8f93',sk*.3);
+  if(h>1.5)q+=r(x+fw,y+h/2-fw/2,w-2*fw,fw,'#ece7dc','#8a8f93',sk*.3);
+  return q+`<path d="M${x+w*.15} ${y+h*.45}L${x+w*.38} ${y+h*.12}" stroke="#fff" stroke-width="${sk*1.2}" opacity=".6" stroke-linecap="round"/>`}
 /* dibujo */
 const leg=(c,t)=>`<span class="lg"><i style="background:${c}"></i>${t}</span>`;
 const tl=()=>[...new Set(T)].map(k=>leg(TY[k][1],TY[k][0])).join('');
@@ -335,27 +410,29 @@ const D=[[1,0],[0,1],[-1,0],[0,-1]];
 function poly(L){const P=[[0,0]];L.forEach((l,k)=>P.push([P[k][0]+D[k][0]*l,P[k][1]+D[k][1]*l]));return P}
 function draw(h,L,W){
   $('xb').disabled=!(+$('pl').textContent>0);
-  const v=$('dv'),i=$('di');i.innerHTML='';v.classList.toggle('r',V==='r');last={h,L,W};
+  const v=$('dv'),i=$('di');i.innerHTML='';v.classList.toggle('r',V==='r');last={h,L,W};$('zc').classList.toggle('hidden',!(V==='r'&&h>0&&W>0));
   if(!(h>0&&W>0)){v.innerHTML='<div class="empty">Escribe la altura y las paredes<br>para ver cómo queda.</div>';return}
   if(V==='t')return plan(h,L);if(V==='r')return rot();
   const back=V==='b',boards=!back||C===2,pw=1.22,ph=2.44,nr=Math.ceil(h/ph-1e-9);
   if(L.reduce((a,l)=>a+Math.ceil(l/pw),0)*nr>800){v.innerHTML='<div class="empty">El área es muy grande para dibujarla.</div>';return}
   const m=Math.max(W,h)*.1+.4,w=W+2*m,hh=h+2*m,B=Math.max(w,hh),fs=B/28,lw=B/450,X=(x,wd)=>back?W-x-wd:x;
-  let s=`<svg viewBox="0 0 ${w} ${hh}"><rect x="${m}" y="${m}" width="${W}" height="${h}" fill="${boards?'#fff':BK}"/>`,a=0;const st=[];
+  let s=`<svg viewBox="0 0 ${w} ${hh}">${MDEF}<rect x="${m}" y="${m}" width="${W}" height="${h}" fill="${boards?'#fff':BK}"/>`,a=0;const st=[];
   L.forEach((l,k)=>{st[k]=a;if(!(l>0))return;
-    if(boards){s+=`<clipPath id="p${k}"><rect x="${m+X(a,l)}" y="${m}" width="${l}" height="${h}"/></clipPath><g clip-path="url(#p${k})">`;
-      for(let r=0;r<nr;r++)for(let c=0;c<Math.ceil(l/pw-1e-9);c++)s+=`<rect x="${m+X(a+c*pw,pw)}" y="${m+h-(r+1)*ph}" width="${pw}" height="${ph}" fill="${TY[T[k]][1]}" stroke="#8a948f" stroke-width="${lw*1.5}"/>`;s+='</g>'}
+    {s+=`<clipPath id="p${k}"><rect x="${m+X(a,l)}" y="${m}" width="${l}" height="${h}"/></clipPath><g clip-path="url(#p${k})">`;
+      for(let r=0;r<nr;r++)for(let c=0;c<Math.ceil(l/pw-1e-9);c++)s+=`<rect x="${m+X(a+c*pw,pw)}" y="${m+h-(r+1)*ph}" width="${pw}" height="${ph}" fill="${boards?TY[T[k]][1]:BK}" stroke="${boards?'#8a948f':'#bfa36e'}" stroke-width="${lw*1.5}"/>`;s+='</g>'}
     a+=l});
-  for(let x=0;x<W+1e-6;x+=(h>3?.407:.61)){const px=m+X(x,0);s+=boards?`<line x1="${px}" y1="${m}" x2="${px}" y2="${m+h}" stroke="#0097a7" stroke-width="${lw*1.4}" stroke-dasharray="${fs*.4} ${fs*.3}"/>`:`<rect x="${px-.03}" y="${m}" width=".06" height="${h}" fill="#78909c"/>`}
+  const sdw=Math.max(stw(),B*.014),rt1=Math.min(.12,h*.04),stud=px=>{const sx=Math.min(Math.max(px-sdw/2,m),m+W-sdw),y0=m+rt1,sh=h-2*rt1,hw=sdw*.36,hh2=sdw*.78;
+    let q=`<rect x="${sx}" y="${y0}" width="${sdw}" height="${sh}" fill="url(#mgv)" stroke="#6f7a82" stroke-width="${lw*1.3}"/><line x1="${sx+sdw*.15}" y1="${y0}" x2="${sx+sdw*.15}" y2="${y0+sh}" stroke="#6f7a82" stroke-width="${lw*.8}" opacity=".7"/><line x1="${sx+sdw*.85}" y1="${y0}" x2="${sx+sdw*.85}" y2="${y0+sh}" stroke="#6f7a82" stroke-width="${lw*.8}" opacity=".7"/>`;
+    holeYs(h).forEach(yy=>{if(yy-hh2/2<rt1||yy+hh2/2>h-rt1)return;q+=`<rect x="${sx+(sdw-hw)/2}" y="${m+h-yy-hh2/2}" width="${hw}" height="${hh2}" rx="${hw/2}" fill="${BK}" stroke="#6f7a82" stroke-width="${lw*1.2}"/>`});return q};
+  for(let x=0;x<W+1e-6;x+=(h>3?.407:.61)){const px=m+X(x,0);s+=boards?`<line x1="${px}" y1="${m}" x2="${px}" y2="${m+h}" stroke="#0097a7" stroke-width="${lw*1.4}" stroke-dasharray="${fs*.4} ${fs*.3}"/>`:stud(px)}
   const rt=Math.min(.12,h*.04);
-  s+=`<rect x="${m}" y="${m}" width="${W}" height="${rt}" fill="#f07f0a"/><rect x="${m}" y="${m+h-rt}" width="${W}" height="${rt}" fill="#f07f0a"/>`;
+  const rf=boards?'#f07f0a':'url(#mgh)',rs=boards?'none':'#6f7a82';s+=`<rect x="${m}" y="${m}" width="${W}" height="${rt}" fill="${rf}" stroke="${rs}" stroke-width="${lw*1.3}"/><rect x="${m}" y="${m+h-rt}" width="${W}" height="${rt}" fill="${rf}" stroke="${rs}" stroke-width="${lw*1.3}"/>`;
   L.forEach((l,k)=>{if(!(l>0))return;if(st[k]>0)s+=`<line x1="${m+X(st[k],0)}" y1="${m-fs*.2}" x2="${m+X(st[k],0)}" y2="${m+h}" stroke="#14532d" stroke-width="${lw*4}"/>`;
     s+=`<text x="${m+X(st[k],l)+l/2}" y="${m-fs*.5}" text-anchor="middle" font-size="${fs*.8}" font-weight="800" fill="currentColor">P${k+1} · ${f2(l)}</text>`});
-  place(L).forEach(o=>{const x=m+X(st[o.k]+o.x,o.w),y=m+h-o.s-o.h;
-    s+=o.t==='p'?`<path d="M${x} ${y+o.h}V${y}H${x+o.w}V${y+o.h}" fill="#fff" stroke="#8d5a2b" stroke-width=".06"/>`:`<rect x="${x}" y="${y}" width="${o.w}" height="${o.h}" fill="#bfe3f2" stroke="#8d5a2b" stroke-width=".06"/><rect x="${x}" y="${y}" width="${o.w}" height=".06" fill="#f07f0a"/><rect x="${x}" y="${y+o.h-.06}" width="${o.w}" height=".06" fill="#f07f0a"/>`});
+  place(L).forEach(o=>{const x=m+X(st[o.k]+o.x,o.w),y=m+h-o.s-o.h;s+=open2d(o,x,y,lw)});
   s+=`<rect x="${m}" y="${m}" width="${W}" height="${h}" fill="none" stroke="#4a545c" stroke-width="${lw*3}"/><text x="${m+W/2}" y="${m+h+m*.75}" text-anchor="middle" font-size="${fs}" font-weight="800" fill="currentColor">Desarrollo total ${f2(W)} m</text><text transform="translate(${m*.45} ${m+h/2}) rotate(-90)" text-anchor="middle" font-size="${fs}" font-weight="800" fill="currentColor">${f2(h)} m</text></svg>`;
   v.innerHTML=s;
-  i.innerHTML=`<span class="chip">${back?(C===2?'Atrás: cara 2':'Atrás: estructura (1 cara)'):'Adelante: cara 1'}</span>`+(boards?tl()+leg('#0097a7','parante @ '+(h>3?'0.407':'0.61')):leg(BK,'reverso de la plancha')+leg('#78909c','parante @ '+(h>3?'0.407':'0.61')))+leg('#f07f0a','riel')+leg('#8d5a2b','contramarco')}
+  i.innerHTML=`<span class="chip">${back?(C===2?'Atrás: cara 2':'Atrás: estructura (1 cara)'):'Adelante: cara 1'}</span>`+(boards?tl()+leg('#0097a7','parante @ '+(h>3?'0.407':'0.61'))+leg('#f07f0a','riel'):leg(BK,'reverso de la plancha')+leg('#c3cbd1','parante con orificios @ '+(h>3?'0.407':'0.61'))+leg('#c3cbd1','riel'))+leg('#8d5a2b','contramarco')}
 function plan(h,L){
   const P=poly(L),xs=P.map(p=>p[0]),ys=P.map(p=>p[1]),x0=Math.min(...xs),y0=Math.min(...ys),bw=Math.max(...xs)-x0,bh=Math.max(...ys)-y0,m=Math.max(bw,bh)*.14+.5,w=bw+2*m,hh=bh+2*m,B=Math.max(w,hh),fs=B/30,tw=Math.max(.09,B*.014),bt=tw*.45,pl=place(L);
   let s=`<svg viewBox="0 0 ${w} ${hh}">`;
@@ -367,24 +444,51 @@ function plan(h,L){
   $('di').innerHTML='<span class="chip">Vista desde arriba</span>'+tl()+leg('#f07f0a','puerta')+leg('#1e90d0','ventana')}
 /* 360 */
 function rot(){
-  const {h,L}=last,P=poly(L),xs=P.map(p=>p[0]),ys=P.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cz=(Math.min(...ys)+Math.max(...ys))/2,R=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys),h)*.85+.5,ca=Math.cos(yaw),sa=Math.sin(yaw),cp=Math.cos(pit),sp=Math.sin(pit);
-  const pr=(x,y,z)=>{x-=cx;z-=cz;y-=h/2;const rx=x*ca+z*sa,rz=-x*sa+z*ca;return[rx,-(y*cp-rz*sp),rz*cp+y*sp]},pt=q=>q.map(p=>p[0].toFixed(3)+','+p[1].toFixed(3)).join(' '),pl=place(L),F=[];
+  const {h,L}=last,P=poly(L),xs=P.map(p=>p[0]),ys=P.map(p=>p[1]),cx=(Math.min(...xs)+Math.max(...xs))/2,cz=(Math.min(...ys)+Math.max(...ys))/2,R=Math.max(Math.max(...xs)-Math.min(...xs),Math.max(...ys)-Math.min(...ys),h)*.85+.5,Z=R/zoom,ca=Math.cos(yaw),sa=Math.sin(yaw),cp=Math.cos(pit),sp=Math.sin(pit);
+  const pr=(x,y,z)=>{x-=cx;z-=cz;y-=h/2;const rx=x*ca+z*sa,rz=-x*sa+z*ca;return[rx,-(y*cp-rz*sp),rz*cp+y*sp]},pt=q=>q.map(p=>p[0].toFixed(3)+','+p[1].toFixed(3)).join(' '),pl=place(L),F=[],offs=L.map((l,k)=>L.slice(0,k).reduce((x,y)=>x+y,0));
   F.push({z:-1e9,s:`<polygon points="${pt(P.slice(0,4).map(p=>pr(p[0],0,p[1])))}" fill="#c9d3cd"/>`});
-  L.forEach((l,k)=>{if(!(l>0))return;const a=P[k],u=D[k],at=(d,y)=>pr(a[0]+u[0]*d,y,a[1]+u[1]*d),q=[at(0,0),at(l,0),at(l,h),at(0,h)],inside=(-(-u[1])*0+(u[0])*ca+(-u[1])*(-sa)*0)*0,nz=-(-u[1])*sa+u[0]*ca;
-    const vis=nz>0,col=vis?TY[T[k]][1]:(C===2?TY[T[k]][1]:BK);
-    let s=`<polygon points="${pt(q)}" fill="${col}" stroke="#6f7a75" stroke-width="${R*.006}"/>`;
-    pl.filter(o=>o.k===k).forEach(o=>{const y0=o.s,oq=[at(o.x,y0),at(o.x+o.w,y0),at(o.x+o.w,y0+o.h),at(o.x,y0+o.h)];s+=`<polygon points="${pt(oq)}" fill="${o.t==='p'?'#fff':'#bfe3f2'}" stroke="#8d5a2b" stroke-width="${R*.01}"/>`});
-    F.push({z:(q[0][2]+q[1][2]+q[2][2]+q[3][2])/4,s})});
+  const tk3=(PA==='89'?1.45:1)*Math.max(.11,R*.022),bt=Math.max(.02,R*.006),DT=tk3+bt+(C===2?bt:0),nn=k=>[-D[k][1],D[k][0]],first3=L.findIndex(l=>l>0),last3=L.reduce((m,l,k)=>l>0?k:m,-1),
+  V=(i,d)=>{const A=i>0&&L[i-1]>0?nn(i-1):[0,0],B=i<4&&L[i]>0?nn(i):[0,0];return[P[i][0]-(A[0]+B[0])*d,P[i][1]-(A[1]+B[1])*d]},
+  zc=q=>q.reduce((t,p)=>t+p[2],0)/q.length,P3=(p,y)=>pr(p[0],y,p[1]),fq=(o,c,w)=>`<polygon points="${pt(o)}" fill="${c}" stroke="#6f7a75" stroke-width="${w||Z*.006}"/>`,
+  vq=(k,d,y0,y1)=>{const a=V(k,d),b=V(k+1,d);return[P3(a,y0),P3(b,y0),P3(b,y1),P3(a,y1)]},
+  hq=(k,d0,d1,y)=>[P3(V(k,d0),y),P3(V(k+1,d0),y),P3(V(k+1,d1),y),P3(V(k,d1),y)],
+  eq=(i,d0,d1)=>[P3(V(i,d0),0),P3(V(i,d1),0),P3(V(i,d1),h),P3(V(i,d0),h)],EB='#cfc9bb',SM='#aeb7bd';
+  L.forEach((l,k)=>{if(!(l>0))return;const a=P[k],u=D[k],n=nn(k),atw=(d,y,o)=>pr(a[0]+u[0]*d-n[0]*o,y,a[1]+u[1]*d-n[1]*o),
+    vis=u[1]*sa+u[0]*ca>0,rzu=-u[0]*sa+u[1]*ca,off=vis?0:(C===2?DT:bt),vf=(d,y)=>atw(d,y,off),bc=C===2?TY[T[k]][1]:BK;
+    let s;
+    if(vis)s=fq(vq(k,0,0,h),TY[T[k]][1]);
+    else if(C===2)s=fq(vq(k,DT,0,h),TY[T[k]][1]);
+    else{s=fq(vq(k,bt,0,h),BK)+studs3(atw,l,offs[k],h,Z,pt,bt,bt+tk3,rzu)}
+    pl.filter(o=>o.k===k).forEach(o=>{s+=opening3(o,atw,vf,rzu,DT,Z,pt)});
+    const q=[vf(0,0),vf(l,0),vf(l,h),vf(0,h)];F.push({z:zc(q),s});
+    /* canto superior: plancha delgada + riel (muro hueco) */
+    let tp=fq(hq(k,0,bt,h),EB)+fq(hq(k,bt,bt+tk3,h),SM);if(C===2)tp+=fq(hq(k,bt+tk3,DT,h),EB);
+    F.push({z:zc(hq(k,0,DT,h))+1e-6,s:tp});
+    /* extremos abiertos */
+    const cap=i=>{let e=fq(eq(i,0,bt),EB)+fq(eq(i,bt,bt+tk3),'#9aa4ab');if(C===2)e+=fq(eq(i,bt+tk3,DT),EB);return e};
+    if(k===first3&&rzu<0)F.push({z:zc(eq(k,0,DT)),s:cap(k)});
+    if(k===last3&&rzu>0)F.push({z:zc(eq(k+1,0,DT)),s:cap(k+1)});
+  });
   F.sort((p,q)=>p.z-q.z);
-  const fz=R*.034,sw=R*.007,tk=R*.03;let ov='';
+  const fz=Z*.034,sw=Z*.007,tk=Z*.03;let ov='';
   L.forEach((l,k)=>{if(!(l>0))return;const a=P[k],u=D[k],at=(d,y)=>pr(a[0]+u[0]*d,y,a[1]+u[1]*d),A=at(0,h+.25),Bp=at(l,h+.25),c=[(A[0]+Bp[0])/2,(A[1]+Bp[1])/2],tx=f2(l)+' M',pw=fz*(tx.length*.6+1.4),ph=fz*1.8;
     ov+=`<g stroke="#0b8f3a" stroke-width="${sw}"><line x1="${A[0]}" y1="${A[1]}" x2="${Bp[0]}" y2="${Bp[1]}"/><line x1="${A[0]}" y1="${A[1]-tk}" x2="${A[0]}" y2="${A[1]+tk}"/><line x1="${Bp[0]}" y1="${Bp[1]-tk}" x2="${Bp[0]}" y2="${Bp[1]+tk}"/></g><rect x="${c[0]-pw/2}" y="${c[1]-ph/2}" width="${pw}" height="${ph}" rx="${ph/2}" fill="#fff" stroke="#0b8f3a" stroke-width="${sw*1.3}"/><text x="${c[0]}" y="${c[1]+fz*.35}" text-anchor="middle" font-size="${fz}" font-weight="900" fill="#0b6b2c">${tx}</text>`});
-  $('dv').innerHTML=`<svg viewBox="${-R} ${-R} ${2*R} ${2*R}">${F.map(f=>f.s).join('')}${ov}</svg>`;
-  $('di').innerHTML='<span class="chip">↻ Arrastra para rotar</span>'+tl()+(C===1?leg(BK,'reverso de la plancha'):'')+leg('#f07f0a','puerta')+leg('#1e90d0','ventana')}
-let dr=null;const dv=$('dv');
-dv.addEventListener('pointerdown',e=>{if(V==='r'){dr=[e.clientX,e.clientY];dv.setPointerCapture(e.pointerId)}});
-dv.addEventListener('pointermove',e=>{if(!dr||V!=='r')return;yaw-=(e.clientX-dr[0])*.01;pit=Math.min(1.4,Math.max(.05,pit+(e.clientY-dr[1])*.01));dr=[e.clientX,e.clientY];rot()});
-dv.addEventListener('pointerup',()=>dr=null);dv.addEventListener('pointercancel',()=>dr=null);
+  if(first3>=0){const u=D[first3],p0=P[first3],A=pr(p0[0]-u[0]*.4,0,p0[1]-u[1]*.4),B=pr(p0[0]-u[0]*.4,h,p0[1]-u[1]*.4),c=[(A[0]+B[0])/2,(A[1]+B[1])/2],tx=f2(h)+' M',pw=fz*(tx.length*.6+1.4),ph=fz*1.8;
+    ov+=`<g stroke="#0b8f3a" stroke-width="${sw}"><line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}"/><line x1="${A[0]-tk}" y1="${A[1]}" x2="${A[0]+tk}" y2="${A[1]}"/><line x1="${B[0]-tk}" y1="${B[1]}" x2="${B[0]+tk}" y2="${B[1]}"/></g><rect x="${c[0]-pw/2}" y="${c[1]-ph/2}" width="${pw}" height="${ph}" rx="${ph/2}" fill="#fff" stroke="#0b8f3a" stroke-width="${sw*1.3}"/><text x="${c[0]}" y="${c[1]+fz*.35}" text-anchor="middle" font-size="${fz}" font-weight="900" fill="#0b6b2c">${tx}</text>`}
+  $('dv').innerHTML=`<svg viewBox="${-Z} ${-Z} ${2*Z} ${2*Z}">${F.map(f=>f.s).join('')}${ov}</svg>`;
+  $('di').innerHTML='<span class="chip">↻ Arrastra para rotar · rueda o pellizco = zoom</span>'+tl()+(C===1?leg(BK,'reverso de la plancha')+leg('#c3cbd1','parantes con orificios'):'')+leg('#b98349','puerta')+leg('#bfe3f2','ventana')}
+const dv=$('dv'),ptr=new Map();let pd=0;
+const pdist=()=>{const a=[...ptr.values()];return Math.hypot(a[0][0]-a[1][0],a[0][1]-a[1][1])};
+function setZ(z){zoom=Math.min(4,Math.max(.5,z));$('zv').textContent=Math.round(zoom*100)+'%';if(V==='r'&&last&&last.h>0)rot()}
+dv.addEventListener('pointerdown',e=>{if(V!=='r')return;ptr.set(e.pointerId,[e.clientX,e.clientY]);try{dv.setPointerCapture(e.pointerId)}catch(x){}if(ptr.size===2)pd=pdist()});
+dv.addEventListener('pointermove',e=>{if(V!=='r'||!ptr.has(e.pointerId))return;const o=ptr.get(e.pointerId);
+  if(ptr.size===1){yaw-=(e.clientX-o[0])*.01;pit=Math.min(1.4,Math.max(.05,pit+(e.clientY-o[1])*.01));ptr.set(e.pointerId,[e.clientX,e.clientY]);rot()}
+  else{ptr.set(e.pointerId,[e.clientX,e.clientY]);const d=pdist();if(pd>0)setZ(zoom*d/pd);pd=d}});
+const pup=e=>{ptr.delete(e.pointerId);pd=0};
+dv.addEventListener('pointerup',pup);dv.addEventListener('pointercancel',pup);
+dv.addEventListener('wheel',e=>{if(V!=='r')return;e.preventDefault();setZ(zoom*Math.exp(-e.deltaY*.0015))},{passive:false});
+$('zi').onclick=()=>setZ(zoom*1.25);$('zo').onclick=()=>setZ(zoom/1.25);
+$('zr').onclick=()=>{yaw=.6;pit=.45;setZ(1)};
 function det(id){const un=a=>[...new Set(a)];
   if(id==='pl')return un(T.slice(0,4).filter((_,k)=>(+$('l'+(k+1)).value||0)>0).map(k=>TY[k][0])).join(', ')+' · '+C+(C===1?' cara':' caras');
   if(id==='par')return [PA?'Parante de '+PA:'',+$('h').value>3?'modulación cada 40.7 cm':''].filter(Boolean).join(' · ');
@@ -421,10 +525,16 @@ function exportImg(){
   cv.width=W*S;cv.height=H*S;const g=cv.getContext('2d');g.scale(S,S);g.fillStyle='#fff';g.fillRect(0,0,W,H);g.textBaseline='alphabetic';run(g,true);
   cv.toBlob(bl=>{const a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='resultados-drywall.png';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000)},'image/png')}
 $('xb').onclick=exportImg;
+/* tema claro por defecto; el usuario puede cambiar a oscuro */
+const THI={light:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg><span class="tl">Oscuro</span>',dark:'<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg><span class="tl">Claro</span>'};
+function setTheme(t,save){document.documentElement.setAttribute('data-theme',t);const b=$('thm');b.innerHTML=THI[t];b.setAttribute('aria-label',t==='dark'?'Cambiar a tema claro':'Cambiar a tema oscuro');
+  if(save){try{localStorage.setItem('calc-tema',t)}catch(e){}}}
+$('thm').onclick=()=>setTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark',true);
+{let t='light';try{if(localStorage.getItem('calc-tema')==='dark')t='dark'}catch(e){}setTheme(t)}
 /* Nuevo cálculo: deja todo en blanco para el siguiente cliente */
 function newCalc(){
   ['h','l1','l2','l3','l4'].forEach(i=>{$(i).value='';$(i).parentNode.classList.add('ey')});
-  C=1;V='f';O=[];oid=0;E=0;PA='';CM=0;CMo=false;CT='';M='';SNAP=null;SU='';SIL='';PK='c';TE='';TP='pc';CI=75;FU='';NW=1;T=['st','st','st','st'];yaw=.6;pit=.45;
+  C=1;V='f';O=[];oid=0;E=0;PA='';CM=0;CMo=false;CT='';M='';SNAP=null;SU='';SIL='';PK='c';TE='';TP='pc';CI=75;FU='';NW=1;T=['st','st','st','st'];yaw=.6;pit=.45;zoom=1;$('zv').textContent='100%';
   $('gt').value='st';document.querySelectorAll('[data-p]').forEach(s=>s.value='st');$('pw').classList.add('hidden');
   $('md').classList.add('hidden');
   $('c1').classList.add('on');$('c2').classList.remove('on');
