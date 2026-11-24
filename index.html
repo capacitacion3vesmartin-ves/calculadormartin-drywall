@@ -218,12 +218,12 @@ details.frm summary:focus-visible{outline:3px solid var(--org);outline-offset:2p
 <script>
 const $=id=>document.getElementById(id);
 const TY={rh:['Placa RH','#91dcd7'],rf:['Placa RF','#f2b5b4'],st:['Placa ST','#dedddd'],mu:['Multiplaca','#d4d4d4'],sb:['Superboard','#d4d4d4']},BK='#e6ca96';
-let C=1,V='f',O=[],oid=0,E=0,PA='',CM=0,M='',T=['st','st','st','st'],yaw=.6,pit=.45,zoom=1,last=null;
+let C=1,V='f',O=[],oid=0,E=0,PA='',CM=3.2,M='',T=['st','st','st','st'],yaw=.6,pit=.45,zoom=1,last=null;
 const f2=x=>(Math.round(x*100)/100).toFixed(2),nm=x=>+x||0,opts=v=>Object.keys(TY).map(k=>`<option value="${k}"${k===v?' selected':''}>${TY[k][0]}</option>`).join('');
 const ICO=d=>`<svg class="ic" viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">${d}</svg>`;
 const DOOR=ICO('<rect x="3.5" y="1.5" width="9" height="13" rx="1"/><circle cx="10.3" cy="8.5" r=".6" fill="currentColor"/>'),WIN=ICO('<rect x="2" y="2" width="12" height="12" rx="1"/><path d="M8 2v12M2 8h12"/>');
 const FUL=[['m','Fulminante marrón','Potencia nivel 2','Para muros clásicos, ejemplo paredes de vivienda','https://www.image2url.com/r2/default/images/1792952801502-8460c0a4-f5a6-4239-b323-b99d9d070d8d.jpg'],['v','Fulminante verde','Potencia nivel 3','Para muros de concreto sólido, ejemplo: columnas de Martín','https://www.image2url.com/r2/default/images/1792952846654-1d9bb07c-3cb1-4484-88b4-a1b68d51358e.jpg']];
-let NW=1,CI=75,FU='',SU='',SIL='',CT='',CMo=false,PK='c',TE='',TP='pc';
+let NW=1,CI=90,FU='m',SU='',SIL='',CT='',CMo=false,PK='c',TE='wf',TP='pc';
 const TEL={c:[['wf','Tornillo Wafer p/ fina 8 x 1/2"','https://www.image2url.com/r2/default/images/1792882646488-de85fb88-57c0-4543-9e53-ffef6ea9d65b.jpg'],['pf','Tornillo p/fina 7 x 7/16"','https://www.image2url.com/r2/default/images/1792882402712-22c0bed0-b685-4514-93bb-bd1d780afedc.jpg']],p:[['wb','Tornillo Wafer p/ broca 8 x 1/2"','https://www.image2url.com/r2/default/images/1792882410378-ecceacc6-847a-4322-ab0c-1ffc2e0005e3.jpg'],['pb','Tornillo p/broca 7 x 7/16"','https://www.image2url.com/r2/default/images/1792882406576-8504bf64-a058-4a3d-8495-ae4b951b08e2.jpg']]};
 const TPL={c:[['pc','Tornillo 6 x 1" punta fina','https://www.image2url.com/r2/default/images/1792882396436-f7d5f410-df27-40ba-951b-0513f8d41fad.jpg']],p:[['pp','Tornillo 6 x 1" punta broca','https://www.image2url.com/r2/default/images/1792882392098-0b3c74bc-9c1d-4b4b-bff7-b5921adab445.jpg']]};
 const PKS=[['c','Parante clásico (espesor 0.45 mm)'],['p','Parante pesado (espesor 0.90 o 1 mm)']];
@@ -534,13 +534,17 @@ $('thm').onclick=()=>setTheme(document.documentElement.getAttribute('data-theme'
 /* Nuevo cálculo: deja todo en blanco para el siguiente cliente */
 function newCalc(){
   ['h','l1','l2','l3','l4'].forEach(i=>{$(i).value='';$(i).parentNode.classList.add('ey')});
-  C=1;V='f';O=[];oid=0;E=0;PA='';CM=0;CMo=false;CT='';M='';SNAP=null;SU='';SIL='';PK='c';TE='';TP='pc';CI=75;FU='';NW=1;T=['st','st','st','st'];yaw=.6;pit=.45;zoom=1;$('zv').textContent='100%';
+  C=1;V='f';O=[];oid=0;E=0;PA='';CM=3.2;CMo=false;CT='';M='';SNAP=null;SU='';SIL='';PK='c';TE='wf';TP='pc';CI=90;FU='m';NW=1;T=['st','st','st','st'];yaw=.6;pit=.45;zoom=1;$('zv').textContent='100%';
   $('gt').value='st';document.querySelectorAll('[data-p]').forEach(s=>s.value='st');$('pw').classList.add('hidden');
   $('md').classList.add('hidden');
   $('c1').classList.add('on');$('c2').classList.remove('on');
   ['f','b','t','r'].forEach(k=>$('v'+k).classList.toggle('on',k==='f'));
   refresh();window.scrollTo({top:0,behavior:'smooth'});$('h').focus({preventScroll:true})}
 
+/* En celular, "Definir materiales" va dentro de Configuraciones (antes de los resultados); en PC queda donde estaba */
+(function(){const mq=window.matchMedia('(max-width:899px)'),b=$('bm'),vw=document.querySelector('.vwrap'),cfg=$('cfg');
+  const place=()=>{if(mq.matches){if(b.parentNode!==cfg)cfg.appendChild(b)}else if(b.parentNode!==vw)vw.insertBefore(b,vw.firstChild)};
+  place();(mq.addEventListener?mq.addEventListener('change',place):mq.addListener(place))})();
 refresh();
 </script>
 </body>
